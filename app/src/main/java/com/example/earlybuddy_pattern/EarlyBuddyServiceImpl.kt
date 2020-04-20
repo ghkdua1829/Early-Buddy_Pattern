@@ -2,6 +2,7 @@ package com.example.earlybuddy_pattern
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object EarlyBuddyServiceImpl {
@@ -13,6 +14,7 @@ object EarlyBuddyServiceImpl {
 
     private val retrofit: Retrofit =
         Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
