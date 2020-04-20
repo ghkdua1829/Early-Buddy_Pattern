@@ -1,5 +1,6 @@
 package com.example.earlybuddy_pattern
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +13,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.DataBindingUtil
 import com.example.earlybuddy_pattern.data.repository.SignUpRepository
+import com.example.earlybuddy_pattern.databinding.ActivitySignupBinding
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_signup.*
@@ -21,11 +24,12 @@ import java.util.regex.Pattern
 
 class SignupActivity : AppCompatActivity() {
 
+    lateinit var binding: ActivitySignupBinding
+
     var SignUpRepository: SignUpRepository = SignUpRepository()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
         getFocus()
         passwordConfirm()
 
@@ -39,7 +43,7 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    private fun postUserData(id: String, pw: String) {
+    fun postUserData(id: String, pw: String) {
 
         //body
         var jsonObject = JSONObject()
@@ -176,4 +180,29 @@ class SignupActivity : AppCompatActivity() {
             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
+}
+
+interface List<T> {
+    operator fun get(index: Int): T
+}
+
+class StringList : List<String> {
+    override fun get(index: Int): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
+
+class ArrayList<T> : List<T> {
+    override fun get(index: Int): T {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
+
+inline fun <reified T> isA(value: Any) {
+    value is T
+}
+
+inline fun <reified T : Activity> Context.startActivity() {
+    val intent = Intent(this, T::class.java)
+    startActivity(intent)
 }
