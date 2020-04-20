@@ -1,12 +1,10 @@
-package com.example.earlybuddy_pattern
+package com.example.earlybuddy_pattern.ui.signup
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -14,6 +12,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import com.example.earlybuddy_pattern.MainActivity
+import com.example.earlybuddy_pattern.R
 import com.example.earlybuddy_pattern.data.repository.SignUpRepository
 import com.example.earlybuddy_pattern.databinding.ActivitySignupBinding
 import com.google.gson.JsonObject
@@ -26,10 +27,16 @@ class SignupActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignupBinding
 
+    var vm: SignUpViewModel = SignUpViewModel()
+
     var SignUpRepository: SignUpRepository = SignUpRepository()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
+        binding = DataBindingUtil.setContentView(
+            this,
+            R.layout.activity_signup
+        )
+
         getFocus()
         passwordConfirm()
 
@@ -41,6 +48,34 @@ class SignupActivity : AppCompatActivity() {
         iv_signup.setOnClickListener {
             postUserData(et_id.text.toString(), et_pw.text.toString())
         }
+        addObservableData()
+    }
+
+    fun addObservableData() {
+        vm.isSuccessNetwork.observe(this, Observer {
+            when {
+                it -> {
+                    val intent = Intent(this@SignupActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                else -> {
+//                    tv_id_red.visibility = View.VISIBLE
+//                    et_id.tag = "red"
+                }
+            }
+        })
+        vm.wifiDisconnect.observe(this, Observer {
+            Toast.makeText(this@SignupActivity, "와이파이 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
+        })
+        vm.successUserNum.observe(this, Observer {
+            Toast.makeText(this@SignupActivity, "${it} 번쨰로 회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT)
+                .show()
+        })
+        vm.turnRed.observe(this, Observer {
+            Toast.makeText(this@SignupActivity, "중복된아이디입니다.", Toast.LENGTH_SHORT)
+                .show()
+        })
     }
 
     fun postUserData(id: String, pw: String) {
@@ -52,25 +87,27 @@ class SignupActivity : AppCompatActivity() {
 
         val body = JsonParser().parse(jsonObject.toString()) as JsonObject
 
-        SignUpRepository.signUp(body = body, success = {
-            if (it.isSuccessful) {
-                Log.e("result is ", it.body().toString())
-                val signupUser = it.body()!!
-                Toast.makeText(
-                    this@SignupActivity,
-                    "아이디 : ${id}, 비밀번호 : ${pw} ${signupUser.data} 번쨰로 회원가입에 성공하셨습니다.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                val intent = Intent(this@SignupActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Log.e("fail message ", it.message())
-                tv_id_red.visibility = View.VISIBLE
-                et_id.tag = "red"
-            }
-        }, fail = {
-            Log.e("error is ", it.toString()) })
+        vm.signUp(body)
+
+//        SignUpRepository.signUp(body = body, success = {
+//            if (it.isSuccessful) {
+//                Log.e("result is ", it.body().toString())
+//                val signupUser = it.body()!!
+//                Toast.makeText(
+//                    this@SignupActivity,
+//                    "아이디 : ${id}, 비밀번호 : ${pw} ${signupUser.data} 번쨰로 회원가입에 성공하셨습니다.",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//                val intent = Intent(this@SignupActivity, MainActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//            } else {
+//                Log.e("fail message ", it.message())
+//                tv_id_red.visibility = View.VISIBLE
+//                et_id.tag = "red"
+//            }
+//        }, fail = {
+//            Log.e("error is ", it.toString()) })
 
     }
 
@@ -180,29 +217,4 @@ class SignupActivity : AppCompatActivity() {
             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
-}
-
-interface List<T> {
-    operator fun get(index: Int): T
-}
-
-class StringList : List<String> {
-    override fun get(index: Int): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-}
-
-class ArrayList<T> : List<T> {
-    override fun get(index: Int): T {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-}
-
-inline fun <reified T> isA(value: Any) {
-    value is T
-}
-
-inline fun <reified T : Activity> Context.startActivity() {
-    val intent = Intent(this, T::class.java)
-    startActivity(intent)
 }
