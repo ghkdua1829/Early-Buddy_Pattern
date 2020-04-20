@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</LinearLayout>
+    <data>
+<variable
+    name="place"
+    type="com.example.earlybuddy_pattern.data.model.Place" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="19dp"
+            android:id="@+id/item_PlaceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:letterSpacing="-0.02"
+            android:lineSpacingExtra="-5sp"
+            android:text="@{place.placeName}"
+            android:textColor="#000000"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_AddressName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:lineSpacingExtra="10sp"
+            android:text="@{place.addressName}"
+            android:textColor="#707070"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@id/item_PlaceName"
+            app:layout_constraintTop_toBottomOf="@id/item_PlaceName" />
+
+        <TextView
+            android:id="@+id/item_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/radius"
+            android:text="도로명"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/item_PlaceName"
+            app:layout_constraintTop_toBottomOf="@id/item_AddressName" />
+
+        <TextView
+            android:id="@+id/item_roadAddressName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@{place.roadAddressName}"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/item_view"
+            app:layout_constraintTop_toTopOf="@id/item_view" />
+
+        <ImageView
+            android:id="@+id/item_line"
+            android:background="#707070"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="19dp"
+            app:layout_constraintTop_toBottomOf="@id/item_roadAddressName"
+            android:layout_height="0.3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
