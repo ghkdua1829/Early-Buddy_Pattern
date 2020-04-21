@@ -1,7 +1,8 @@
 package com.example.earlybuddy_pattern
 
 import com.example.earlybuddy_pattern.data.model.PlaceResponse
-import com.example.earlybuddy_pattern.data.model.UserResponse
+import com.example.earlybuddy_pattern.data.model.SignInUserResponse
+import com.example.earlybuddy_pattern.data.model.SignUpUserResponse
 import com.google.gson.JsonObject
 import io.reactivex.Observable
 import retrofit2.http.Body
@@ -13,7 +14,12 @@ interface EarlyBuddyService {
     @POST("/users/signup")
     fun postSignupUser(
         @Body() body: JsonObject
-    ): Observable<UserResponse>
+    ): Observable<SignUpUserResponse>
+
+    @POST("/users/signin")
+    fun postSigninUser(
+        @Body() body: JsonObject
+    ): Observable<SignInUserResponse>
 
     @GET("/searchAddress")
     fun getAdress(
