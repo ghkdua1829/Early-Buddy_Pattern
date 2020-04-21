@@ -11,10 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.login.LoginActivity"></activity>
         <activity android:name=".MainActivity" />
+        <activity android:name=".ui.visited.VisitedPlaceActivity" />
+        <activity android:name=".ui.favorite.FavoriteStateActivity" />
         <activity android:name=".ui.signup.SignupActivity" />
-        <activity android:name=".ui.favorite.FavoriteStateActivity"/>
-        <activity android:name=".ui.visited.VisitedPlaceActivity">
+        <activity android:name=".FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
