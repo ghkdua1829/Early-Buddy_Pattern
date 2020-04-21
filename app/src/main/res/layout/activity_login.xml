@@ -1,10 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.LoginActivity">
+
+        <ImageView
+            android:id="@+id/act_login_iv_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_login_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/act_login_tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="300dp"
+            android:lineSpacingExtra="-2sp"
+            android:text="아이디"
+            android:textColor="#707070"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/act_login_cl_id"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/radius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/act_login_tv_id">
+
+            <EditText
+                android:id="@+id/act_login_et_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="19dp"
+                android:background="@null"
+                android:hint="아이디를 입력해주세요."
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="19sp"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/act_login_tv_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:lineSpacingExtra="-2sp"
+            android:text="비밀번호"
+            android:textColor="#707070"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/act_login_tv_id"
+            app:layout_constraintTop_toBottomOf="@id/act_login_cl_id" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/act_login_cl_pw"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/radius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/act_login_tv_pw">
+
+            <EditText
+                android:id="@+id/act_login_et_pw"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="19dp"
+                android:background="@null"
+                android:hint="비밀번호를 입력해주세요."
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="19sp"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/act_login_iv_auto_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/ic_login_activated"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/act_login_cl_pw" />
+
+        <TextView
+            android:id="@+id/act_login_tv_auto_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="-0.03"
+            android:lineSpacingExtra="21sp"
+            android:text="자동 로그인"
+            android:textColor="#707070"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/act_login_iv_auto_login"
+            app:layout_constraintStart_toEndOf="@id/act_login_iv_auto_login"
+            app:layout_constraintTop_toTopOf="@id/act_login_iv_auto_login" />
+
+        <Button
+            android:id="@+id/act_login_btn_sign_in"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="85dp"
+            android:background="@drawable/btn_radius"
+            android:text="로그인"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/act_login_tv_go_sign_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="-3sp"
+            android:text="회원가입하러 가기"
+            android:textColor="#707070"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/act_login_btn_sign_in" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
