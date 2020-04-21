@@ -15,7 +15,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.earlybuddy_pattern.MainActivity
 import com.example.earlybuddy_pattern.R
-import com.example.earlybuddy_pattern.data.repository.SignUpRepository
 import com.example.earlybuddy_pattern.databinding.ActivitySignupBinding
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -29,7 +28,6 @@ class SignupActivity : AppCompatActivity() {
 
     var vm: SignUpViewModel = SignUpViewModel()
 
-    var SignUpRepository: SignUpRepository = SignUpRepository()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(
@@ -69,7 +67,11 @@ class SignupActivity : AppCompatActivity() {
             Toast.makeText(this@SignupActivity, "와이파이 연결을 확인해주세요.", Toast.LENGTH_SHORT).show()
         })
         vm.successUserNum.observe(this, Observer {
-            Toast.makeText(this@SignupActivity, "${it} 번쨰로 회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT)
+            Toast.makeText(
+                this@SignupActivity,
+                "$it 번쨰로 회원가입에 성공하셨습니다.",
+                Toast.LENGTH_SHORT
+            )
                 .show()
         })
         vm.turnRed.observe(this, Observer {
